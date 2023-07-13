@@ -3,8 +3,9 @@ from behave import given, when, then
 from time import sleep
 
 
-SEARCH_INPUT = (By.NAME, 'SPF') #q
-SEARCH_SUBMIT = (By.NAME, 'btnK')
+SEARCH_INPUT = (By.CSS_SELECTOR, 'SPF') #q
+SEARCH_SUBMIT = (By.CSS_SELECTOR, 'class.icon icon-search modal__toggle-open')
+')
 
 
 @given('Open main page')
