@@ -1,10 +1,15 @@
-from telnetlib import EC
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+
+
+#init driver
+
+
 
 # get the path to the ChromeDriver executable
 driver_path = ChromeDriverManager().install()
@@ -13,20 +18,17 @@ driver_path = ChromeDriverManager().install()
 service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
+driver.wait = WebDriverWait(driver, 10) # start with driver.wait
+# checks for condition to be not everyone 500ms (1/2 s)
+# defined in the spot where we need it
+# always foils with TimeoutException
 
 
 #applied to all find element(s) functions
 #100 ms = 0.1 s
 # defined once
 #not modifying the error / exception
-driver.implicitly_wait(5)
-
-
-# start with driver.wat
-# checks for condition to be not everyone 500ms (1/2 s)
-# defined in the spot where we need it
-# always foils with TimeoutException
-driver.wait = WebDriverWait(driver, 5)
+driver.implicitly_wait(5) #check every 100 ms
 
 
 # open the url
@@ -39,13 +41,11 @@ search.clear()
 search.send_keys('Desk')
 
 # wait for 4 sec
-# sleep(4)
-google_search_btn = (By.NAME, 'q')
-driver.wait.until(EC.element_to_be_clickable(google_search_btn), message='Google search btn not clickable')
+driver.wait.until(EC.element_to_be_clickable((By.NAME, 'btnK')), message='Search btn not clickable')
 
 
-# click search button
-driver.find_element(*google_search_btn).click()
+# click search
+driver.find_element(By.NAME, 'btnK').click()
 
 
 # verify search results

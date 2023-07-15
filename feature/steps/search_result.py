@@ -3,26 +3,32 @@ from behave import given, when, then
 from time import sleep
 
 
-SEARCH_INPUT = (By.NAME, 'SPF') #q
-SEARCH_SUBMIT = (By.NAME, 'btnK')
+SEARCH_INPUT = (By.CSS_SELECTOR, 'input#Search-In-Modal.search__input.field__input') #q
+SEARCH_SUBMIT = (By.CSS_SELECTOR, "button.search__button.focus-inset")
+SEARCH_FIELD = (By.CSS_SELECTOR, "svg.icon.icon-search.modal__toggle-open")
 
 
 @given('Open main page')
-def open_google(context):
-    context.driver.get('https://www.shop.cureskin/')
+def open_cureskin(context):
+    context.driver.get('https://shop.cureskin.com//')
+    # context.app.main_page.function_name()
 
 
-@when('Click search')
+@when('Click search btn')
 def click_search_icon(context):
-    context.driver.find_element(*SEARCH_SUBMIT).click()
+    context.driver.find_element(*SEARCH_FIELD).click()
 
 
+@when('Input text {text}')
+def input_search_word(context, text):
+    context.driver.find_element(*SEARCH_FIELD).send_keys(text)
 
-@when('Search for {search_word} ')
-def input_search(context, search_word):
-    search = context.driver.find_element(*SEARCH_INPUT)
-    search.clear()
-    search.send_keys(search_word)
+
+# @when('Search for {search_word} ')
+# def input_search(context, search_word):
+#     search = context.driver.find_element(*SEARCH_SUBMIT)
+#     search.clear()
+#     search.send_keys(search_word)
 
 
 @then('Verify the results have SPF')
