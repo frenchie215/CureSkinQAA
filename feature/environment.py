@@ -1,23 +1,30 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from behave import given, when, then
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from time import sleep
-
-
+from webdriver_manager.chrome import ChromeDriverManager
+from app.application import Application
 
 def browser_init(context):
     """
     :param context: Behave context
     """
+
+#get the path to the ChromeDriver exucutable
     driver_path = ChromeDriverManager().install()
+
+#create a new chrome browser instance
     service = Service(driver_path)
     context.driver = webdriver.Chrome(service=service)
-    context.driver.maximize_window()
+    # context.browser = webdriver.Safari()
+    # context.browser = webdriver.Firefox()
 
+    context.driver.maximize_window()
     context.driver.implicitly_wait(4)
-    context.driver.wait = WebDriverWait(context.driver, 5)
+    context.driver.wait = WebDriverWait(context.driver, 10)
+    context.app = Application(driver=context.driver)
+
 
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)

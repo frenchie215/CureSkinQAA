@@ -2,6 +2,6 @@ Feature: CureSkin search results
 
   Scenario: Search results show the right result
     Given Open main page
-    When Click Search
-    When Search for SPF
-    Then Verify the results have SPF
+    When Click search button
+    When Input text SPF
+    Then Verify the text SPF is shown

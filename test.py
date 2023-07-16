@@ -6,13 +6,13 @@ from time import sleep
 #uppercase for locators)
 SEARCH_RESULTS = (By.CSS_SELECTOR, "[data-component-type='s-search-result']")
 PRODUCT_PRICE = (By.XPATH, "//div[@data-component-type='s-search-result']")
-AMAZON_SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
-SEARCH_ICON = (By.ID, 'nav-search-submit-button')
+# AMAZON_SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
+# SEARCH_ICON = (By.ID, 'nav-search-submit-button')
 PRODUCT_IMG = (By.XPATH, ".s-image[data-image-latency='s-product-image']")
 PRODUCT_TITLE = (By.CSS_SELECTOR, 'h2 span.a-text-normal')
 
 ORDERS_BTN = (By.ID, 'nav-orders')
-SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
+# SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
 HAM_MENU = (By.ID, 'nav-hamburger-menu')
 FOOTER_LINKS = (By.CSS_SELECTOR, "navFooterMoreOnAmazon a")
 HEADER_LINKS = (By.CSS_SELECTOR, "#nav-xshop a.nav-a[data-csa-c-type='link']")
@@ -37,8 +37,8 @@ def input_search_word(context):
 
 @when('Click on search button')
 def click_search(context):
-    context.driver.find_element(*SEARCH_ICON).click()
-
+    # context.driver.find_element(*SEARCH_ICON).click()
+    context.app.header.click_search()
 
 @when('Click on button from SignIn popup')
 def click_sign_in_popup_btn(context):
