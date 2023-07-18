@@ -23,7 +23,7 @@ def open_main(context):
 def click_search_icon(context):
     try:
         # Wait for the pop-up to appear
-        wait = WebDriverWait(context.driver, 15)
+        wait = WebDriverWait(context.driver, 20)
         wait.until(EC.visibility_of_element_located(CLOSE_POPUP))
     except TimeoutException:
         pass
